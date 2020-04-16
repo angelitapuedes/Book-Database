@@ -8,6 +8,19 @@
 	// get the resbault set (set of rows)
 	$result = mysqli_query($conn, $sql);
 
+
+//Sarah
+	//$sqla='SELECT genre, count(bid) FROM book';
+	//$count_all=mysqli_query($conn, $sqla);
+	//$count=mysqli_fetch_all($count_all, MYSQLI_ASSOC);
+	$sqla='SELECT count(*) AS total FROM book';
+	$result2=mysqli_query($conn, $sqla);
+	$data=mysqli_fetch_assoc($result2);
+	echo $data['total'];
+	//print_r($count);
+
+    
+
 	// fetch the resulting rows as an array
 	$books = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
@@ -30,6 +43,10 @@
 	<div class="container">
 		<div class="row">
 
+				
+					<p>Book Count is <?php echo $data['total']; ?></p>
+				
+
 			<?php foreach($books as $book): ?>
 
 				<div class="col s6 m4">
@@ -42,6 +59,10 @@
 						<div class="card-action right-align">
 							<a class="brand-text" href="details.php?bid=<?php echo $book['bid'] ?>">more info</a>
 						</div>
+						<div class="card-action right-align">
+							<a class="brand-text" href="genre_count.php?bid=<?php echo $book['bid'] ?>">Book Data</a>
+						</div>
+
 					</div>
 				</div>
 
